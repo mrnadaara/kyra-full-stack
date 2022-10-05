@@ -1,0 +1,19 @@
+{
+  "name": "kyra-full-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "(cd backend && yarn dev) & (cd frontend && yarn dev)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrnadaara/kyra-full-stack.git"
+  },
+  "author": "sharmaarke ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrnadaara/kyra-full-stack/issues"
+  },
+  "homepage": "https://github.com/mrnadaara/kyra-full-stack#readme"
+}
