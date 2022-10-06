@@ -38,7 +38,6 @@ describe('Location routes', () => {
         .get('/places/1/photos')
         .query({
           limit: 1,
-          classifications: 'outdoor',
         })
         .reply(200, [
           {

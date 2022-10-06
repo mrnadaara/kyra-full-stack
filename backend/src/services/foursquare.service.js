@@ -15,7 +15,7 @@ const getNearbyPlaces = async ({ lat, lon, categories }) => {
       sort: 'DISTANCE',
       categories,
     });
-    const response = await fetch(`${config.foursquare_api.url}/places?${params}`);
+    const response = await fetch(`${config.foursquare_api.url}/places?${params.toString()}`);
     return await response.json();
   } catch (error) {
     throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve places');
@@ -23,19 +23,31 @@ const getNearbyPlaces = async ({ lat, lon, categories }) => {
 };
 
 const getPlacesPhotos = async (places) => {
-  const placesWithPhotos = places.map(async () => {
+  const placesWithPhotos = places.map(async (place) => {
     try {
       const params = new URLSearchParams({
-        ll: `${lat},${lon}`,
-        sort: 'DISTANCE',
-        categories,
+        limit: 1,
       });
-      const response = await fetch(`${config.foursquare_api.url}/places?${params}`);
-      return await response.json();
+      const response = await fetch(`${config.foursquare_api.url}/places/${place.fsq_id}/photos/?${params.toString()}`);
+      const photos = await response.json();
+
+      return {
+        id: place.fsq_id,
+        name: place.name,
+        categories: place.categories.map((category) => ({
+          label: category.name,
+          img: `${category.icon.prefix}64${category.icon.suffix}`,
+        })),
+        distance: place.distance,
+        formatted_address: place.formatted_address,
+        photo: `${photos[0].prefix}original${photos[0].suffix}`,
+      };
     } catch (error) {
-      throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve places');
+      throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve photos');
     }
   });
+
+  return placesWithPhotos;
 };
 
 module.exports = {
