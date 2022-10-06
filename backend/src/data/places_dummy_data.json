@@ -1,0 +1,101 @@
+{
+  "results": [
+    {
+      "fsq_id": "1",
+      "categories": [
+        {
+          "id": 12,
+          "name": "Ice Cream Parlor",
+          "icon": {
+            "prefix": "https://example.com/icecream_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "distance": 3694,
+      "geocodes": {
+          "main": {
+              "latitude": 12.345678,
+              "longitude": -0.123456
+          },
+          "roof": {
+              "latitude": 12.345678,
+              "longitude": -0.123456
+          }
+      },
+      "link": "/v3/places/1",
+      "location": {
+          "address": "1 Example Road",
+          "admin_region": "England",
+          "country": "GB",
+          "cross_street": "",
+          "formatted_address": "1 Example Road, Example, Greater London, EX1 1AA",
+          "locality": "Example",
+          "neighborhood": [
+              "Example"
+          ],
+          "post_town": "London",
+          "postcode": "EX1 1AA",
+          "region": "Greater London"
+      },
+      "name": "Example Gelatos",
+      "related_places": {},
+      "timezone": "Europe/London"
+    },
+    {
+      "fsq_id": "2",
+      "categories": [
+        {
+          "id": 13,
+          "name": "Indie Movie Theater",
+          "icon": {
+            "prefix": "https://example.com/theater_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "distance": 3694,
+      "geocodes": {
+          "main": {
+              "latitude": 12.345678,
+              "longitude": -0.123456
+          },
+          "roof": {
+              "latitude": 12.345678,
+              "longitude": -0.123456
+          }
+      },
+      "link": "/v3/places/2",
+      "location": {
+          "address": "2 Example Road",
+          "admin_region": "England",
+          "country": "GB",
+          "cross_street": "",
+          "formatted_address": "2 Example Road, Example, Greater London, EX1 1AB",
+          "locality": "Example",
+          "neighborhood": [
+              "Example"
+          ],
+          "post_town": "London",
+          "postcode": "EX1 1AB",
+          "region": "Greater London"
+      },
+      "name": "Example Movie Theatre",
+      "related_places": {},
+      "timezone": "Europe/London"
+    }
+  ],
+  "context": {
+    "geo_bounds": {
+      "circle": {
+        "center": {
+          "latitude": 12.345678,
+          "longitude": -0.123456
+        },
+        "radius": 22000
+      }
+    }
+  }
+}

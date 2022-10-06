@@ -1,14 +1,15 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
-const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { userService } = require('../services');
+const { foursquareService } = require('../services');
 
-const createUser = catchAsync(async (req, res) => {
-  const user = await userService.createUser(req.body);
-  res.status(httpStatus.CREATED).send(user);
+const getPlaces = catchAsync(async (req, res) => {
+  const places = await foursquareService.getNearbyPlaces(req.body);
+  const placesWithPhotos = await foursquareService.getPlacesPhotos(places);
+  res.status(httpStatus.OK).send({
+    places: placesWithPhotos,
+  });
 });
 
 module.exports = {
-  createUser,
+  getPlaces,
 };

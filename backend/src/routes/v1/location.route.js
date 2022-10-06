@@ -5,7 +5,7 @@ const locationController = require('../../controllers/location.controller');
 
 const router = express.Router();
 
-// router.post('/', validate(userValidation.createUser), userController.createUser);
+router.post('/', validate(locationValidation.getPlaces), locationController.getPlaces);
 
 module.exports = router;
 

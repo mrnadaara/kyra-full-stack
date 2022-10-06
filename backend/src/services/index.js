@@ -1,1 +1,1 @@
-module.exports.userService = require('./foursquare.service');
+module.exports.foursquareService = require('./foursquare.service');

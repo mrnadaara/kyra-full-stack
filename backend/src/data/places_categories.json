@@ -1,0 +1,42 @@
+[
+  {
+    "id": 10000,
+    "label": "Arts and Entertainment"
+  },
+  {
+    "id": 11000,
+    "label": "Business and Professional Services"
+  },
+  {
+    "id": 12000,
+    "label": "Community and Government"
+  },
+  {
+    "id": 13000,
+    "label": "Dining and Drinking"
+  },
+  {
+    "id": 14000,
+    "label": "Event"
+  },
+  {
+    "id": 15000,
+    "label": "Health and Medicine"
+  },
+  {
+    "id": 16000,
+    "label": "Landmarks and Outdoors"
+  },
+  {
+    "id": 17000,
+    "label": "Retail"
+  },
+  {
+    "id": 18000,
+    "label": "Sports and Recreation"
+  },
+  {
+    "id": 19000,
+    "label": "Travel and Transportation"
+  }
+]

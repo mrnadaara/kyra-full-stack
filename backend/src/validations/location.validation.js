@@ -1,13 +1,13 @@
 const Joi = require('joi');
 
-const createUser = {
+const getPlaces = {
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    name: Joi.string().required(),
-    role: Joi.string().required().valid('user', 'admin'),
+    lat: Joi.string().required(),
+    lon: Joi.string().required(),
+    categories: Joi.string(),
   }),
 };
 
 module.exports = {
-  createUser,
+  getPlaces,
 };
