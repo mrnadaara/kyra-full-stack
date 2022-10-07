@@ -5,6 +5,10 @@ import ApiError from '../../../src/utils/ApiError';
 import config from '../../../src/config/config';
 import logger from '../../../src/config/logger';
 
+interface ErrorWithStatus extends Error {
+  statusCode: number
+}
+
 describe('Error middlewares', () => {
   describe('Error converter', () => {
     test('should return the same ApiError object it was called with', () => {
@@ -17,7 +21,7 @@ describe('Error middlewares', () => {
     });
 
     test('should convert an Error to ApiError and preserve its status and message', () => {
-      const error = new Error('Any error');
+      const error = new Error('Any error') as ErrorWithStatus;
       error.statusCode = httpStatus.BAD_REQUEST;
       const next = jest.fn();
 
@@ -50,7 +54,7 @@ describe('Error middlewares', () => {
     });
 
     test('should convert an Error without message to ApiError with default message of that http status', () => {
-      const error = new Error();
+      const error = new Error() as ErrorWithStatus;
       error.statusCode = httpStatus.BAD_REQUEST;
       const next = jest.fn();
 
@@ -85,7 +89,7 @@ describe('Error middlewares', () => {
 
   describe('Error handler', () => {
     beforeEach(() => {
-      jest.spyOn(logger, 'error').mockImplementation(() => {});
+      jest.spyOn(logger, 'error').mockImplementation();
     });
 
     test('should send proper error response and put the error message in res.locals', () => {
