@@ -1,9 +1,9 @@
-const request = require('supertest');
-const nock = require('nock');
-const httpStatus = require('http-status');
-const app = require('../../src/app');
-const config = require('../../src/config/config');
-const placesDummyData = require('../../src/data/places_dummy_data.json');
+import request from 'supertest';
+import nock from 'nock';
+import httpStatus from 'http-status';
+import app from '../../src/app';
+import config from '../../src/config/config';
+import placesDummyData from '../../src/data/placesDummyData.json';
 
 describe('Places routes', () => {
   describe('POST /v1/places', () => {

@@ -1,0 +1,1 @@
+export * as foursquareService from './foursquare.service';

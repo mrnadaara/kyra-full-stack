@@ -1,7 +1,7 @@
-const fetch = require('node-fetch');
-const httpStatus = require('http-status');
-const ApiError = require('./ApiError');
-const config = require('../config/config');
+import fetch from 'node-fetch';
+import httpStatus from 'http-status';
+import ApiError from './ApiError';
+import config from '../config/config';
 
 const foursquareClient = (url) => ({
   async get(parameters) {
@@ -34,4 +34,4 @@ const foursquareClient = (url) => ({
   },
 });
 
-module.exports = foursquareClient;
+export default foursquareClient;

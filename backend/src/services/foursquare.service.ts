@@ -1,8 +1,8 @@
-const Promise = require('bluebird');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const FoursquareClient = require('../utils/FoursquareClient');
-const categoryJson = require('../data/places_categories.json');
+import BlueBird from 'bluebird';
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError';
+import FoursquareClient from '../utils/FoursquareClient';
+import categoryJson from '../data/placesCategories.json';
 
 /**
  * fetch list of places nearby
@@ -40,7 +40,6 @@ const fetchPhoto = async (id) => {
 
     return `${photos[0].prefix}original${photos[0].suffix}`;
   } catch (error) {
-    console.log(error);
     throw new ApiError(httpStatus.BAD_GATEWAY, `Could not retrieve photos. ID:${id}`);
   }
 };
@@ -52,7 +51,7 @@ const fetchPhoto = async (id) => {
  */
 const getPlacesPhotos = async (places) => {
   try {
-    const placesWithPhotos = await Promise.map(places, async (place) => {
+    const placesWithPhotos = await BlueBird.map(places, async (place) => {
       return {
         id: place.fsq_id,
         name: place.name,
@@ -76,7 +75,7 @@ const getCategories = () => {
   return categoryJson;
 };
 
-module.exports = {
+export {
   getNearbyPlaces,
   getPlacesPhotos,
   getCategories,

@@ -1,14 +1,14 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const placesValidation = require('../../validations/places.validation');
-const placesController = require('../../controllers/places.controller');
+import express from 'express';
+import validate from '../../middlewares/validate';
+import { placesValidation } from '../../validations';
+import { placesController } from'../../controllers';
 
 const router = express.Router();
 
 router.post('/', validate(placesValidation.getPlaces), placesController.getPlaces);
 router.get('/categories', placesController.getCategories);
 
-module.exports = router;
+export default router;
 
 /**
  * @swagger

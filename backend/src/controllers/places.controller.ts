@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const { foursquareService } = require('../services');
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync';
+import { foursquareService } from '../services';
 
 const getPlaces = catchAsync(async (req, res) => {
   const places = await foursquareService.getNearbyPlaces(req.body);
@@ -17,7 +17,7 @@ const getCategories = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = {
+export {
   getPlaces,
   getCategories,
 };
