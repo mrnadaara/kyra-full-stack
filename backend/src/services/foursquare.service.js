@@ -1,8 +1,7 @@
 const Promise = require('bluebird');
-const fetch = require('node-fetch');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const config = require('../config/config');
+const FoursquareClient = require('../utils/FoursquareClient');
 const categoryJson = require('../data/places_categories.json');
 
 /**
@@ -12,16 +11,13 @@ const categoryJson = require('../data/places_categories.json');
  */
 const getNearbyPlaces = async ({ lat, lon, categories }) => {
   try {
-    const params = new URLSearchParams({
+    const places = await FoursquareClient('/places/search').get({
+      ll: `${lat},${lon}`,
       sort: 'DISTANCE',
       categories,
     });
-    const response = await fetch(`${config.foursquare_api.url}/places/search?${params.toString()}&ll=${lat},${lon}`, {
-      headers: {
-        Authorization: config.foursquare_api.key,
-      },
-    });
-    return await response.json();
+
+    return places;
   } catch (error) {
     throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve places');
   }
@@ -34,15 +30,9 @@ const getNearbyPlaces = async ({ lat, lon, categories }) => {
  */
 const fetchPhoto = async (id) => {
   try {
-    const params = new URLSearchParams({
+    const photos = await FoursquareClient(`/places/${id}/photos`).get({
       limit: 1,
     });
-    const response = await fetch(`${config.foursquare_api.url}/places/${id}/photos?${params.toString()}`, {
-      headers: {
-        Authorization: config.foursquare_api.key,
-      },
-    });
-    const photos = await response.json();
 
     if (!photos.length) {
       return '';
@@ -50,7 +40,7 @@ const fetchPhoto = async (id) => {
 
     return `${photos[0].prefix}original${photos[0].suffix}`;
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve photo');
+    throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve places');
   }
 };
 

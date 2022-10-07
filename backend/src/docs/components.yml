@@ -27,6 +27,13 @@ components:
           type: string
         photo:
           type: string
+    Categories:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
 
   responses:
     BadGateway:
@@ -40,6 +47,9 @@ components:
             message: Could not retrieve data
   
   examples:
-    LocationSuccess:
+    PlacesSuccess:
       summary: An example of a nearby place fetched
       value: {"places": [{"id": "1234", "name": "Example Store", "categories": [{"label": "ice cream", "img": "icecream_64.png"}], "distance": "12345", "formatted_address": "123 Example Road, London, EX1 1AA", "photo": "photo1.png"}]}
+    CategoriesSuccess:
+      summary: An example of a list of categories
+      value: {categories: [{"id":"10000", "label": "Arts and Entertainment"}, {"id":"11000", "label": "Retail"}]}

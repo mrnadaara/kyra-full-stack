@@ -1,5 +1,5 @@
 const express = require('express');
-const locationRoute = require('./location.route');
+const placesRoute = require('./places.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -7,8 +7,8 @@ const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: '/location',
-    route: locationRoute,
+    path: '/places',
+    route: placesRoute,
   },
 ];
 

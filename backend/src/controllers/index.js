@@ -1,1 +1,1 @@
-module.exports.userController = require('./location.controller');
+module.exports.placesController = require('./places.controller');
