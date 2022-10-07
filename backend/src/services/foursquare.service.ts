@@ -1,15 +1,42 @@
-const Promise = require('bluebird');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const FoursquareClient = require('../utils/FoursquareClient');
-const categoryJson = require('../data/places_categories.json');
+import BlueBird from 'bluebird';
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError';
+import FoursquareClient from '../utils/FoursquareClient';
+import categoryJson from '../data/placesCategories.json';
+
+type getNearbyType = {
+  results: any[];
+};
+
+type locationBody = {
+  lat: string;
+  lon: string;
+  categories: string;
+}
+
+type category = {
+  id: number;
+  label: string;
+}
+
+type placeWithPhoto = {
+  id: string;
+  name: string;
+  categories: {
+    label: string;
+    img: string;
+  }
+  distance: number;
+  formatted_address: string;
+  photo: string;
+}
 
 /**
  * fetch list of places nearby
  * @param {Object} locationBody
  * @returns {Promise<Place>}
  */
-const getNearbyPlaces = async ({ lat, lon, categories }) => {
+const getNearbyPlaces = async ({ lat, lon, categories }: locationBody): Promise<getNearbyType> => {
   try {
     const places = await FoursquareClient('/places/search').get({
       ll: `${lat},${lon}`,
@@ -28,7 +55,7 @@ const getNearbyPlaces = async ({ lat, lon, categories }) => {
  * @param {string} id
  * @returns {Promise<Place>}
  */
-const fetchPhoto = async (id) => {
+const fetchPhoto = async (id: string): Promise<string> => {
   try {
     const photos = await FoursquareClient(`/places/${id}/photos`).get({
       limit: 1,
@@ -40,7 +67,6 @@ const fetchPhoto = async (id) => {
 
     return `${photos[0].prefix}original${photos[0].suffix}`;
   } catch (error) {
-    console.log(error);
     throw new ApiError(httpStatus.BAD_GATEWAY, `Could not retrieve photos. ID:${id}`);
   }
 };
@@ -50,9 +76,9 @@ const fetchPhoto = async (id) => {
  * @param {Array<Places>} places
  * @returns {Promise<Place>}
  */
-const getPlacesPhotos = async (places) => {
+const getPlacesPhotos = async (places: Object[]): Promise<placeWithPhoto[]> => {
   try {
-    const placesWithPhotos = await Promise.map(places, async (place) => {
+    const placesWithPhotos = await BlueBird.map(places, async (place) => {
       return {
         id: place.fsq_id,
         name: place.name,
@@ -72,11 +98,11 @@ const getPlacesPhotos = async (places) => {
   }
 };
 
-const getCategories = () => {
+const getCategories = (): category[] => {
   return categoryJson;
 };
 
-module.exports = {
+export {
   getNearbyPlaces,
   getPlacesPhotos,
   getCategories,

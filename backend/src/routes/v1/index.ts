@@ -1,7 +1,7 @@
-const express = require('express');
-const placesRoute = require('./places.route');
-const docsRoute = require('./docs.route');
-const config = require('../../config/config');
+import express from 'express';
+import placesRoute from './places.route';
+import docsRoute from './docs.route';
+import config from '../../config/config';
 
 const router = express.Router();
 
@@ -31,4 +31,4 @@ if (config.env === 'development') {
   });
 }
 
-module.exports = router;
+export default router;

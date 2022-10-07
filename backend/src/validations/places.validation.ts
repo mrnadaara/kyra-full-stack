@@ -8,6 +8,6 @@ const getPlaces = {
   }),
 };
 
-module.exports = {
+export {
   getPlaces,
-};
+}

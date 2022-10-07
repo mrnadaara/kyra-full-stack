@@ -1,8 +1,7 @@
-const nock = require('nock');
-// const httpStatus = require('http-status');
-const { foursquareService } = require('../../../src/services');
-const config = require('../../../src/config/config');
-const placesDummyData = require('../../../src/data/places_dummy_data.json');
+import nock from 'nock';
+import { foursquareService } from '../../../src/services';
+import config from '../../../src/config/config';
+import placesDummyData from '../../../src/data/placesDummyData.json';
 
 describe('Foursquare services', () => {
   describe('getNearByPlaces', () => {

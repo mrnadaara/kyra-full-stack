@@ -1,14 +1,19 @@
-const fetch = require('node-fetch');
-const httpStatus = require('http-status');
-const ApiError = require('./ApiError');
-const config = require('../config/config');
+import fetch from 'node-fetch';
+import httpStatus from 'http-status';
+import ApiError from './ApiError';
+import config from '../config/config';
 
-const foursquareClient = (url) => ({
+type FourSquareClient = {
+  get: (parameters: any) => Promise<any>;
+  post: (parameters: any) => Promise<any>;
+};
+
+const foursquareClient = (resource: string): FourSquareClient => ({
   async get(parameters) {
     try {
       const mapParameters = Object.keys(parameters).map((param) => `${param}=${parameters[param]}`);
-      const requestUrl = [url, '?', mapParameters.join('&')].join('');
-      const response = await fetch(`${config.foursquare_api.url}${requestUrl}`, {
+      const requestUrl = [config.foursquare_api.url, resource, '?', mapParameters.join('&')].join('');
+      const response = await fetch(requestUrl, {
         headers: {
           Authorization: config.foursquare_api.key,
         },
@@ -20,7 +25,7 @@ const foursquareClient = (url) => ({
   },
   async post(parameters) {
     try {
-      const response = await fetch(`${config.foursquare_api.url}${url}`, {
+      const response = await fetch(`${config.foursquare_api.url}${resource}`, {
         headers: {
           Authorization: config.foursquare_api.key,
         },
@@ -34,4 +39,4 @@ const foursquareClient = (url) => ({
   },
 });
 
-module.exports = foursquareClient;
+export default foursquareClient;
