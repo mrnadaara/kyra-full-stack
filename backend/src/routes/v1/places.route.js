@@ -1,12 +1,12 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const locationValidation = require('../../validations/location.validation');
-const locationController = require('../../controllers/places.controller');
+const placesValidation = require('../../validations/places.validation');
+const placesController = require('../../controllers/places.controller');
 
 const router = express.Router();
 
-router.post('/', validate(locationValidation.getPlaces), locationController.getPlaces);
-router.get('/categories', locationController.getCategories);
+router.post('/', validate(placesValidation.getPlaces), placesController.getPlaces);
+router.get('/categories', placesController.getCategories);
 
 module.exports = router;
 

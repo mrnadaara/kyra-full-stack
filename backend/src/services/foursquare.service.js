@@ -40,7 +40,8 @@ const fetchPhoto = async (id) => {
 
     return `${photos[0].prefix}original${photos[0].suffix}`;
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_GATEWAY, 'Could not retrieve places');
+    console.log(error);
+    throw new ApiError(httpStatus.BAD_GATEWAY, `Could not retrieve photos. ID:${id}`);
   }
 };
 

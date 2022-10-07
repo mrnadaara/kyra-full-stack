@@ -1,1 +1,1 @@
-module.exports.userValidation = require('./location.validation');
+module.exports.userValidation = require('./places.validation');
