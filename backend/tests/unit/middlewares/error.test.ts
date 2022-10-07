@@ -6,7 +6,9 @@ import config from '../../../src/config/config';
 import logger from '../../../src/config/logger';
 
 interface ErrorWithStatus extends Error {
-  statusCode: number
+  statusCode: number;
+  message: string;
+  isOperational: boolean;
 }
 
 describe('Error middlewares', () => {
@@ -38,7 +40,7 @@ describe('Error middlewares', () => {
     });
 
     test('should convert an Error without status to ApiError with status 500', () => {
-      const error = new Error('Any error');
+      const error = new Error('Any error') as ErrorWithStatus;
       const next = jest.fn();
 
       errorConverter(error, httpMocks.createRequest(), httpMocks.createResponse(), next);
@@ -71,7 +73,7 @@ describe('Error middlewares', () => {
     });
 
     test('should convert any other object to ApiError with status 500 and its message', () => {
-      const error = {};
+      const error: any = {};
       const next = jest.fn();
 
       errorConverter(error, httpMocks.createRequest(), httpMocks.createResponse(), next);

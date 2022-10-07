@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import xss from 'xss-clean';
 import compression from 'compression';
@@ -11,7 +11,7 @@ import routes from './routes/v1';
 import { errorConverter, errorHandler } from './middlewares/error';
 import ApiError from './utils/ApiError';
 
-const app = express();
+const app: Express = express();
 
 if (config.env !== 'test') {
   app.use(morgan.successHandler);
@@ -44,7 +44,7 @@ app.use(passport.initialize());
 app.use('/v1', routes);
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
 

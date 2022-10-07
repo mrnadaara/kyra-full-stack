@@ -4,12 +4,39 @@ import ApiError from '../utils/ApiError';
 import FoursquareClient from '../utils/FoursquareClient';
 import categoryJson from '../data/placesCategories.json';
 
+type getNearbyType = {
+  results: any[];
+};
+
+type locationBody = {
+  lat: string;
+  lon: string;
+  categories: string;
+}
+
+type category = {
+  id: number;
+  label: string;
+}
+
+type placeWithPhoto = {
+  id: string;
+  name: string;
+  categories: {
+    label: string;
+    img: string;
+  }
+  distance: number;
+  formatted_address: string;
+  photo: string;
+}
+
 /**
  * fetch list of places nearby
  * @param {Object} locationBody
  * @returns {Promise<Place>}
  */
-const getNearbyPlaces = async ({ lat, lon, categories }) => {
+const getNearbyPlaces = async ({ lat, lon, categories }: locationBody): Promise<getNearbyType> => {
   try {
     const places = await FoursquareClient('/places/search').get({
       ll: `${lat},${lon}`,
@@ -28,7 +55,7 @@ const getNearbyPlaces = async ({ lat, lon, categories }) => {
  * @param {string} id
  * @returns {Promise<Place>}
  */
-const fetchPhoto = async (id) => {
+const fetchPhoto = async (id: string): Promise<string> => {
   try {
     const photos = await FoursquareClient(`/places/${id}/photos`).get({
       limit: 1,
@@ -49,7 +76,7 @@ const fetchPhoto = async (id) => {
  * @param {Array<Places>} places
  * @returns {Promise<Place>}
  */
-const getPlacesPhotos = async (places) => {
+const getPlacesPhotos = async (places: Object[]): Promise<placeWithPhoto[]> => {
   try {
     const placesWithPhotos = await BlueBird.map(places, async (place) => {
       return {
@@ -71,7 +98,7 @@ const getPlacesPhotos = async (places) => {
   }
 };
 
-const getCategories = () => {
+const getCategories = (): category[] => {
   return categoryJson;
 };
 

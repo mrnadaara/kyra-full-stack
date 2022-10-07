@@ -1,8 +1,9 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import catchAsync from '../utils/catchAsync';
 import { foursquareService } from '../services';
 
-const getPlaces = catchAsync(async (req, res) => {
+const getPlaces = catchAsync(async (req: Request, res: Response):Promise<void> => {
   const places = await foursquareService.getNearbyPlaces(req.body);
   const placesWithPhotos = await foursquareService.getPlacesPhotos(places.results);
   res.status(httpStatus.OK).send({
@@ -10,7 +11,7 @@ const getPlaces = catchAsync(async (req, res) => {
   });
 });
 
-const getCategories = catchAsync(async (req, res) => {
+const getCategories = catchAsync(async (req: Request, res: Response):Promise<void> => {
   const categories = foursquareService.getCategories();
   res.status(httpStatus.OK).send({
     categories,
