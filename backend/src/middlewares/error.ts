@@ -4,13 +4,7 @@ import config from '../config/config';
 import logger from '../config/logger';
 import ApiError from '../utils/ApiError';
 
-interface ErrorWithStatus extends Error {
-  statusCode: number;
-  message: string;
-  isOperational: boolean;
-}
-
-const errorConverter = (err: ErrorWithStatus, req: Request, res: Response, next: NextFunction) => {
+const errorConverter = (err, req: Request, res: Response, next: NextFunction) => {
   let error = err;
   if (!(error instanceof ApiError)) {
     const statusCode =
@@ -22,7 +16,7 @@ const errorConverter = (err: ErrorWithStatus, req: Request, res: Response, next:
 };
 
 // eslint-disable-next-line no-unused-vars
-const errorHandler = (err: ErrorWithStatus, req: Request, res: Response) => {
+const errorHandler = (err, req: Request, res: Response) => {
   let { statusCode, message } = err;
   if (config.env === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
