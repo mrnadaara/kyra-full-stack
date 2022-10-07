@@ -7,11 +7,11 @@ const placesDummyData = require('../../src/data/places_dummy_data.json');
 
 describe('Location routes', () => {
   describe('POST /v1/location', () => {
-    test('should return 200 and successfully return', async () => {
+    test('should return 200 and successfully return list of places with photos', async () => {
       // v1/location expected response
       const locationResponse = {
-        id: 1,
-        name: '',
+        id: '1',
+        name: 'Example Gelatos',
         categories: [
           {
             label: 'Ice Cream Parlor',
@@ -24,11 +24,10 @@ describe('Location routes', () => {
       };
       // mock external api call to foursquare places
       nock(config.foursquare_api.url)
-        .get('/places')
+        .get('/places/search')
         .query({
           ll: '12.345678,-0.123456',
           sort: 'DISTANCE',
-          open_now: 'true',
           categories: '17000',
         })
         .reply(200, placesDummyData);
