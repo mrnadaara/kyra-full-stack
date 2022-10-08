@@ -1,0 +1,56 @@
+{
+  "places": [
+    {
+        "id": "61bc56dfa61b17015718d924",
+        "name": "Dr J Love - Tessa Jowell Gp Surgery",
+        "categories": [
+            {
+                "label": "Medical Center",
+                "img": "https://ss3.4sqi.net/img/categories_v2/building/medical_64.png"
+            }
+        ],
+        "distance": 3660,
+        "formatted_address": "72H, East Dulwich Grove, London, Greater London, SE22 8EY",
+        "photo": ""
+    },
+    {
+        "id": "51505357e4b0dab64127c8fd",
+        "name": "Lanesborough Wing",
+        "categories": [
+            {
+                "label": "Hospital",
+                "img": "https://ss3.4sqi.net/img/categories_v2/building/medical_64.png"
+            }
+        ],
+        "distance": 3817,
+        "formatted_address": "St George's Hospital, Tooting, Greater London",
+        "photo": "https://fastly.4sqi.net/img/general/original/89219286_E47qp12IIDkSjigXkEjO4E77RYKs-c1OYeJsL9vlN9U.jpg"
+    },
+    {
+        "id": "4bf3a32b706e20a1976ca898",
+        "name": "King's College Hospital",
+        "categories": [
+            {
+                "label": "Hospital",
+                "img": "https://ss3.4sqi.net/img/categories_v2/building/medical_64.png"
+            }
+        ],
+        "distance": 3867,
+        "formatted_address": "Denmark Hill, Camberwell, Greater London, SE5 9RS",
+        "photo": "https://fastly.4sqi.net/img/general/original/Z2C0CAJEICFJBJKHEYTCSNG3QL3VPQQTSYJTA032OHC2MD00.jpg"
+    },
+    {
+        "id": "4c8787b4e602b1f74067c87a",
+        "name": "Dental Institute",
+        "categories": [
+            {
+                "label": "Dentist",
+                "img": "https://ss3.4sqi.net/img/categories_v2/building/medical_dentist_64.png"
+            }
+        ],
+        "distance": 4010,
+        "formatted_address": "King's College Hospital, Denmark Hill, Camberwell, Greater London, Camberwell, Greater London, SE5 9RS",
+        "photo": "https://fastly.4sqi.net/img/general/original/20396431_VzHKwBddJzminnHA4SoXSsX4vmgSfg2_RAv19Vm71yE.jpg"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+.location-container {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .title {
+    margin: 10px 0;
+    font-size: 1.5rem;
+  }
+}
+
+.select, .chip-label {
+  color: white;
+}
+
+.select {
+  .input-label {
+    border-color: white !important;
+  }
+}
