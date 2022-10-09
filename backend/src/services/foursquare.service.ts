@@ -4,6 +4,8 @@ import ApiError from '../utils/ApiError';
 import FoursquareClient from '../utils/FoursquareClient';
 import categoryJson from '../data/placesCategories.json';
 
+const MILES = 0.000621;
+
 type getNearbyType = {
   results: any[];
 };
@@ -79,14 +81,20 @@ const fetchPhoto = async (id: string): Promise<string> => {
 const getPlacesPhotos = async (places: Object[]): Promise<placeWithPhoto[]> => {
   try {
     const placesWithPhotos = await BlueBird.map(places, async (place) => {
+      const distance = new Intl.NumberFormat('en-GB', {
+        style: 'unit',
+        unit: 'mile',
+        unitDisplay: 'short',
+        maximumFractionDigits: 2,
+      }).format(place.distance * MILES);
       return {
         id: place.fsq_id,
         name: place.name,
         categories: place.categories.map((category) => ({
           label: category.name,
-          img: `${category.icon.prefix}64${category.icon.suffix}`,
+          img: `${category.icon.prefix}bg_64${category.icon.suffix}`,
         })),
-        distance: place.distance,
+        distance,
         formatted_address: place.location.formatted_address,
         photo: await fetchPhoto(place.fsq_id),
       };

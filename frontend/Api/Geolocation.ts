@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 
 export default function useGeolocation () {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [lat, setLat] = useState(0);
   const [lon, setLon] = useState(0);
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your browser' as any);
+      setError('Geolocation is not supported by your browser');
     } else {
       setLoading(true);
       navigator.geolocation.getCurrentPosition(
@@ -16,7 +16,13 @@ export default function useGeolocation () {
           setLat(coords.latitude);
           setLon(coords.longitude);
         },
-        (error) => setError(error as any),
+        (error) => {
+          if (error.code === 1) {
+            setError("You denied permission to access location");
+          } else if (error.code === 2) {
+            setError("Cannot retrieve your position");
+          }
+        },
       );
     }
   }, []);

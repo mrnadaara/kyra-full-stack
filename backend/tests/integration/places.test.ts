@@ -15,10 +15,10 @@ describe('Places routes', () => {
         categories: [
           {
             label: 'Ice Cream Parlor',
-            img: 'https://example.com/icecream_64.png',
+            img: 'https://example.com/icecream_bg_64.png',
           },
         ],
-        distance: 3694,
+        distance: '2.29 mi',
         formatted_address: '1 Example Road, Example, Greater London, EX1 1AA',
         photo: 'https://example.com/img/general/original/111.jpg',
       };

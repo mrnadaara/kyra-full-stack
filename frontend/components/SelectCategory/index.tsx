@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,33 +9,11 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+import {
+  MenuProps,
+  getStyles
+} from './config';
 import styles from '../../styles/Location.module.scss';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-  sx: {
-    "&& .Mui-selected": {
-      backgroundColor: "rgb(97, 97, 97) !important",
-      color: "white"
-    }
-  }
-};
-
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightBold,
-  };
-}
 
 type CategoryType = {
   label: string;
@@ -43,7 +22,9 @@ type CategoryType = {
 
 type CategoryProp = {
   categories: CategoryType[];
-  updateSelectedCategories: (selectedCategories: string) => void
+  updateSelectedCategories: (selectedCategories: string) => void;
+  loading: boolean;
+  error: any;
 };
 
 type useCategoryType = {
@@ -52,7 +33,12 @@ type useCategoryType = {
   isError: any;
 };
 
-export default function SelectCategory({categories, updateSelectedCategories}: CategoryProp) {
+export default function SelectCategory({
+  categories,
+  updateSelectedCategories,
+  loading,
+  error,
+}: CategoryProp) {
   const theme = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const handleChange = (event: SelectChangeEvent<typeof selectedCategory>) => {
@@ -68,6 +54,24 @@ export default function SelectCategory({categories, updateSelectedCategories}: C
   useEffect(() => {
     updateSelectedCategories(selectedCategory.join(','));
   }, [selectedCategory]);
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <h3 className={styles.error}>
+          {error}
+        </h3>
+      </Box>
+    );
+  }
 
   return (
     <div>

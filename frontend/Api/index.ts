@@ -26,7 +26,7 @@ export function useCategories () {
     setLoading(true);
     fetchCategories().then(
       ({categories}) => setData(categories),
-      (error) => setError(error),
+      (error) => setError(error.message),
     );
   }, []);
 
@@ -65,7 +65,7 @@ export function usePlaces (lat: number, lon: number, categories: string) {
     setLoading(true);
     fetchPlaces({lat, lon, categories}).then(
       ({places}) => setData(places),
-      (error) => setError(error),
+      (error) => setError(error.message),
     );
   };
 
