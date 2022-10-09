@@ -1,5 +1,6 @@
 .location-container {
-  margin-top: 4rem;
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +8,7 @@
   .title {
     margin: 10px 0;
     font-size: 1.5rem;
+    text-align: center;
   }
 }
 
@@ -15,7 +17,9 @@
 }
 
 .select {
-  .input-label {
-    border-color: white !important;
+  width: 300px;
+
+  @media(max-width: 300px) {
+    width: 200px;
   }
 }

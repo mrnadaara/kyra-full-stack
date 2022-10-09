@@ -1,11 +1,9 @@
 import express from 'express';
-import validate from '../../middlewares/validate';
-import { placesValidation } from '../../validations';
 import { placesController } from'../../controllers';
 
 const router = express.Router();
 
-router.post('/', validate(placesValidation.getPlaces), placesController.getPlaces);
+router.get('/', placesController.getPlaces);
 router.get('/categories', placesController.getCategories);
 
 export default router;
@@ -13,19 +11,23 @@ export default router;
 /**
  * @swagger
  * /places:
- *   post:
+ *   get:
  *     summary: Get list of places
  *     description: Will fetch a list of nearby places with photos sorted by closest to farthest
  *     parameters:
- *       - name: lat
- *         required: true
- *         type: string
- *       - name: lon
- *         required: true
- *         type: string
- *       - name: categories
- *         required: true
- *         type: string
+ *       - in: query
+ *          name: lat
+ *          required: true
+ *          schema:
+ *            type: string
+ *          name: lon
+ *          required: true
+ *          schema:
+ *            type: string
+ *          name: categories
+ *          required: true
+ *          schema:
+ *            type: string
  *     responses:
  *       "200":
  *         description: OK

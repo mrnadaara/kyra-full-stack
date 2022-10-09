@@ -4,7 +4,8 @@ import catchAsync from '../utils/catchAsync';
 import { foursquareService } from '../services';
 
 const getPlaces = catchAsync(async (req: Request, res: Response):Promise<void> => {
-  const places = await foursquareService.getNearbyPlaces(req.body);
+  const {lat, lon, categories}  = req.query as any;
+  const places = await foursquareService.getNearbyPlaces({lat, lon, categories});
   const placesWithPhotos = await foursquareService.getPlacesPhotos(places.results);
   res.status(httpStatus.OK).send({
     places: placesWithPhotos,

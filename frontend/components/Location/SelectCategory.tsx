@@ -9,6 +9,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import styles from '../../styles/Location.module.scss';
+import { useCategories } from '../../Api';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -27,19 +28,6 @@ const MenuProps = {
   }
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
     fontWeight:
@@ -49,15 +37,27 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
+type CategoryType = {
+  label: string;
+  id: string;
+};
+
+type useCategoryType = {
+  categories: CategoryType[];
+  isLoading: boolean;
+  isError: any;
+};
+
 export default function MultipleSelectChip() {
   const theme = useTheme();
-  const [personName, setPersonName] = useState<string[]>([]);
+  const { categories, isLoading, isError }: useCategoryType = useCategories();
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof selectedCategory>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setSelectedCategory(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -65,33 +65,33 @@ export default function MultipleSelectChip() {
 
   return (
     <div>
-      <FormControl className={styles.select} sx={{ m: 1, width: 300 }}>
-        <InputLabel className={styles["chip-label"]} id="demo-multiple-chip-label">Select a Category</InputLabel>
+      <FormControl className={styles.select}>
+        <InputLabel className={styles["chip-label"]} id="demo-multiple-chip-label">Select any Category</InputLabel>
         <Select
           IconComponent={(props) => <ArrowDropDownCircleIcon {...props} sx={{ color: "white !important", mr: 2 }}/>}
           variant="filled"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={selectedCategory}
           onChange={handleChange}
-          input={<OutlinedInput className={styles["input-label"]} id="select-multiple-chip" label="Select a Category" />}
+          input={<OutlinedInput className={styles["input-label"]} id="select-multiple-chip" label="Select any Category" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip sx={{ backgroundColor: "rgb(97, 97, 97) !important", color: "white" }} key={value} label={value} />
+                <Chip sx={{ backgroundColor: "rgb(97, 97, 97) !important", color: "white" }} key={value} label={categories?.find(cat => cat.id === value)?.label} />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {categories.map((category: CategoryType) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={category.id}
+              value={category.id}
+              style={getStyles(category.id, selectedCategory, theme)}
             >
-              {name}
+              {category.label}
             </MenuItem>
           ))}
         </Select>

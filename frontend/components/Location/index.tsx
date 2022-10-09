@@ -14,7 +14,7 @@ const Location = ({lat, lon}: CoordinatesProps) => (
       Foursquare in your location
     </h1>
     <h2>
-      ({lat} {lon})
+      {`${lat}, ${lon}`}
     </h2>
     <Box>
       <SelectCategory />
