@@ -25,15 +25,20 @@
   }
 }
 
-.select, .chip-label {
-  color: white;
-}
-
-.select {
-  width: 300px;
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 50px;
-
-  @media(max-width: 300px) {
-    width: 200px;
+  .select, .chip-label {
+    color: white;
+  }
+  
+  .select {
+    width: 300px;
+    margin-right: 10px;
+    @media(max-width: 300px) {
+      width: 200px;
+    }
   }
 }

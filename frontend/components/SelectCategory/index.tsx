@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -9,29 +9,18 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import {
   MenuProps,
   getStyles
 } from './config';
 import styles from '../../styles/Location.module.scss';
-
-type CategoryType = {
-  label: string;
-  id: string;
-};
-
-type CategoryProp = {
-  categories: CategoryType[];
-  updateSelectedCategories: (selectedCategories: string) => void;
-  loading: boolean;
-  error: any;
-};
-
-type useCategoryType = {
-  categories: CategoryType[];
-  isLoading: boolean;
-  isError: any;
-};
+import {
+  CategoryType,
+  CategoryProp,
+} from '../../utils/types';
 
 export default function SelectCategory({
   categories,
@@ -51,9 +40,13 @@ export default function SelectCategory({
     );
   };
 
+  const updateCategories = useCallback(() => {
+    updateSelectedCategories(selectedCategory.join(','))
+  }, [selectedCategory, updateSelectedCategories]);
+
   useEffect(() => {
-    updateSelectedCategories(selectedCategory.join(','));
-  }, [selectedCategory]);
+    updateCategories();
+  }, [selectedCategory, updateCategories]);
 
   if (loading) {
     return (
@@ -74,7 +67,7 @@ export default function SelectCategory({
   }
 
   return (
-    <div>
+    <div className={styles["select-container"]}>
       <FormControl className={styles.select}>
         <InputLabel className={styles["chip-label"]} id="demo-multiple-chip-label">Select any Category</InputLabel>
         <Select
@@ -106,6 +99,11 @@ export default function SelectCategory({
           ))}
         </Select>
       </FormControl>
+      <Tooltip title="Clear Category">
+        <IconButton onClick={() => setSelectedCategory([])} aria-label="clear-all">
+          <ClearAllIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }

@@ -1,17 +1,10 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from '../../styles/Location.module.scss';
-
-
-type CoordinatesProps = {
-  lat: number;
-  lon: number;
-  loading: boolean;
-  error: any;
-}
+import { CoordinatesProps } from '../../utils/types';
 
 const Location = ({lat, lon, loading, error}: CoordinatesProps) => {
-  if (!lat && !lon) {
+  if (loading) {
     return (
       <Box className={styles['location-container']}>
         <h2 className={styles.message}>

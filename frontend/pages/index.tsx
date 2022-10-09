@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Head from 'next/head'
@@ -10,6 +10,11 @@ import Location from '../components/Location';
 import Places from '../components/Places';
 import SelectCategory from '../components/SelectCategory';
 import { useCategories, usePlaces, useGeolocation } from '../Api';
+import {
+  useCategoryType,
+  useGeoLocationType,
+  usePlaceType
+} from '../utils/types';
 
 const darkTheme = createTheme({
   palette: {
@@ -17,56 +22,11 @@ const darkTheme = createTheme({
   },
 });
 
-type CategoryType = {
-  label: string;
-  id: string;
-};
-
-type PlaceType = {
-  id: string;
-  name: string;
-  categories: {
-    label: string;
-    img: string;
-  }
-  distance: number;
-  formatted_address: string;
-  photo: string;
-}
-
-type useCategoryType = {
-  categories: CategoryType[];
-  isLoading: boolean;
-  isError: any;
-};
-
-type useGeoLocationType = {
-  lat: number;
-  lon: number;
-  geoLoading: boolean;
-  geoError: any;
-};
-
-type usePlaceType = {
-  places: PlaceType[];
-  isLoading: boolean;
-  isError: any;
-  updatePlaces: () => void;
-};
-
 const Home: NextPage = () => {
   const [selectedCategories, setSelectedCategories] = useState('');
   const { lat, lon, geoLoading, geoError }: useGeoLocationType = useGeolocation();
   const { categories, isLoading: categoryLoading, isError: categoryError }: useCategoryType = useCategories();
-  const { places, isLoading: placesLoading, isError: placeError, updatePlaces }: usePlaceType = usePlaces(lat, lon, selectedCategories);
-  
-  useEffect(() => {
-    // get coordinates
-  }, []);
-
-  useEffect(() => {
-    updatePlaces();
-  }, [lat, lon, selectedCategories]);
+  const { places, isLoading: placesLoading, isError: placeError }: usePlaceType = usePlaces(lat, lon, selectedCategories);
   
   return (
     <ThemeProvider theme={darkTheme}>
@@ -77,7 +37,7 @@ const Home: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar />
-        <GeoDialog lat={lat} lon={lon}/>
+        <GeoDialog loading={geoLoading}/>
         <div className={styles.main}>
           <Location
             lat={lat}

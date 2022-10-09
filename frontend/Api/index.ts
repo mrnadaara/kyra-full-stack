@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 import useGeolocation from './Geolocation';
-
-type placesParamsType = {
-  lat: number;
-  lon: number;
-  categories: string;
-  [index: string]: string | number;
-}
+import { placesParamsType } from '../utils/types';
 
 export function useCategories () {
   const [loading, setLoading] = useState(false);
@@ -74,6 +68,10 @@ export function usePlaces (lat: number, lon: number, categories: string) {
   }, []);
 
   useEffect(() => {
+    updatePlaces();
+  }, [lat, lon, categories]);
+
+  useEffect(() => {
     setLoading(false);
   }, [data, error]);
 
@@ -81,7 +79,6 @@ export function usePlaces (lat: number, lon: number, categories: string) {
     places: data || [],
     isLoading: loading,
     isError: error,
-    updatePlaces,
   }
 }
 

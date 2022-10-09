@@ -1,23 +1,18 @@
-import * as React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { DialogProps } from '../../utils/types';
 
-type DialogProps = {
-  lat: number;
-  lon: number;
-}
+export default function GeoDialog({ loading }: DialogProps) {
+  const [open, setOpen] = useState(loading);
 
-export default function GeoDialog({ lat, lon }: DialogProps) {
-  const [open, setOpen] = React.useState(!lat && !lon);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  useEffect(() => {
+    setOpen(loading);
+  }, [loading]);
 
   const handleClose = () => {
     setOpen(false);

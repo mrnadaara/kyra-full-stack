@@ -6,28 +6,11 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { styled } from '@mui/material/styles';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-import { Tooltip } from '@mui/material';
-
-type CategoryType = {
-  label: string;
-  img: string;
-};
-
-type PlacesProps = {
-  places: PlaceType[];
-  loading: boolean;
-  error: any;
-};
-
-type PlaceType = {
-  id: string;
-  name: string;
-  categories: CategoryType[];
-  distance: number;
-  formatted_address: string;
-  photo: string;
-}
+import Tooltip from '@mui/material/Tooltip';
+import {
+  PlacesCategoryType,
+  PlacesProps,
+} from '../../utils/types';
 
 const CategoryItems = styled(ImageListItemBar)`
   background: none;
@@ -120,7 +103,7 @@ const Places = ({ places, loading, error }: PlacesProps) => {
             position="bottom"
             actionIcon={
               <>
-                {item.categories.map((cat: CategoryType, index: number) => (
+                {item.categories.map((cat: PlacesCategoryType, index: number) => (
                   <IconButton
                     key={`${index}-${cat.img}`}
                     sx={{ color: 'white' }}

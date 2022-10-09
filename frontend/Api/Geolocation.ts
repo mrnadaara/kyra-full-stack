@@ -6,11 +6,19 @@ export default function useGeolocation () {
   const [lat, setLat] = useState(0);
   const [lon, setLon] = useState(0);
 
+  const checkPermission = () => {
+    navigator.permissions.query({name:'geolocation'}).then((result) => {
+      if (result.state == 'prompt') {
+        setLoading(true);
+      }
+    });
+  }
+
   useEffect(() => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser');
     } else {
-      setLoading(true);
+      checkPermission();
       navigator.geolocation.getCurrentPosition(
         ({coords}) => {
           setLat(coords.latitude);
