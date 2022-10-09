@@ -6,7 +6,7 @@ import config from '../../src/config/config';
 import placesDummyData from '../../src/data/placesDummyData.json';
 
 describe('Places routes', () => {
-  describe('POST /v1/places', () => {
+  describe('GET /v1/places', () => {
     test('should return 200 and successfully return list of places with photos', async () => {
       // v1/location expected response
       const placeResponse = {
@@ -56,19 +56,22 @@ describe('Places routes', () => {
         })
         .reply(200, []);
 
-      const response = await request(app).post('/v1/places').send({
+      const testParams = {
         lat: '12.345678',
         lon: '-0.123456',
         categories: '17000',
-      });
+      };
+      const mapParameters = Object.keys(testParams).map((param) => `${param}=${testParams[param]}`);
+      const requestUrl = ['/v1/places', '?', mapParameters.join('&')].join('');
 
+      const response = await request(app).get(requestUrl);
       expect(response.status).toEqual(httpStatus.OK);
       expect(response.body.places).toHaveLength(2);
       expect(response.body.places[0]).toEqual(placeResponse);
     });
 
     test('should return 400 error if there are missing parameters', async () => {
-      const response = await request(app).post('/v1/places').send();
+      const response = await request(app).get('/v1/places');
       expect(response.status).toEqual(httpStatus.BAD_REQUEST);
     });
   });
