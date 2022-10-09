@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { NextPage } from 'next';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar';
 import GeoDialog from '../components/GeoDialog';
@@ -59,7 +58,7 @@ const Home: NextPage = () => {
         </div>
         <footer className={styles.footer}>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="https://www.linkedin.com/in/sharmarke-ahmed/"
             target="_blank"
             rel="noopener noreferrer"
           >
