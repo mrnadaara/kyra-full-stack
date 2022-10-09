@@ -1,11 +1,10 @@
 import Box from '@mui/material/Box';
-import SelectCategory from './SelectCategory';
 import styles from '../../styles/Location.module.scss';
 
 
 type CoordinatesProps = {
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
 }
 
 const Location = ({lat, lon}: CoordinatesProps) => (
@@ -13,12 +12,9 @@ const Location = ({lat, lon}: CoordinatesProps) => (
     <h1 className={styles.title}>
       Foursquare in your location
     </h1>
-    <h2>
+    <h2 className={styles.title}>
       {`${lat}, ${lon}`}
     </h2>
-    <Box>
-      <SelectCategory />
-    </Box>
   </Box>
 );
 

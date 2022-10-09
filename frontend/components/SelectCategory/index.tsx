@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import styles from '../../styles/Location.module.scss';
-import { useCategories } from '../../Api';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,17 +41,20 @@ type CategoryType = {
   id: string;
 };
 
+type CategoryProp = {
+  categories: CategoryType[];
+  updateSelectedCategories: (selectedCategories: string) => void
+};
+
 type useCategoryType = {
   categories: CategoryType[];
   isLoading: boolean;
   isError: any;
 };
 
-export default function MultipleSelectChip() {
+export default function SelectCategory({categories, updateSelectedCategories}: CategoryProp) {
   const theme = useTheme();
-  const { categories, isLoading, isError }: useCategoryType = useCategories();
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-
   const handleChange = (event: SelectChangeEvent<typeof selectedCategory>) => {
     const {
       target: { value },
@@ -62,6 +64,10 @@ export default function MultipleSelectChip() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+
+  useEffect(() => {
+    updateSelectedCategories(selectedCategory.join(','));
+  }, [selectedCategory]);
 
   return (
     <div>

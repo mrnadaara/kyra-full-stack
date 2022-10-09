@@ -19,13 +19,15 @@ type PlaceType = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | string>
 ) {
   try {
-    const response = await fetch(`${process.env.KYRA_BACKEND_URL}/places/categories`);
-    const categories = await response.json();
-    res.status(200).json(categories);
+    const mapParameters = Object.keys(req.query).map((param) => `${param}=${req.query[param]}`);
+    const requestUrl = [process.env.KYRA_BACKEND_URL, '/places', '?', mapParameters.join('&')].join('');
+    const response = await fetch(requestUrl);
+    const places = await response.json();
+    res.status(200).json(places);
   } catch (error) {
-    res.status(response.status)
+    res.status(400).send('Could not retrieve places');
   }
 }

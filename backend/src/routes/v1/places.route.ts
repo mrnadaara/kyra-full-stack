@@ -16,18 +16,20 @@ export default router;
  *     description: Will fetch a list of nearby places with photos sorted by closest to farthest
  *     parameters:
  *       - in: query
- *          name: lat
- *          required: true
- *          schema:
- *            type: string
- *          name: lon
- *          required: true
- *          schema:
- *            type: string
- *          name: categories
- *          required: true
- *          schema:
- *            type: string
+ *         name: lat
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: lon
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: categories
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
  *       "200":
  *         description: OK

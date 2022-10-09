@@ -4,7 +4,22 @@ import { styled } from '@mui/material/styles';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
-import data from '../../data/dummy_places.json';
+
+type PlacesProps = {
+  places: PlaceType[];
+};
+
+type PlaceType = {
+  id: string;
+  name: string;
+  categories: {
+    label: string;
+    img: string;
+  }
+  distance: number;
+  formatted_address: string;
+  photo: string;
+}
 
 const ImageGalleryList = styled('ul')(({ theme }) => ({
   display: 'grid',
@@ -23,10 +38,10 @@ const ImageGalleryList = styled('ul')(({ theme }) => ({
   },
 }));
 
-const Places = () => {
+const Places = ({ places }: PlacesProps) => {
   return (
     <ImageGalleryList>
-      {data.places.map((item) => (
+      {places.map((item) => (
         <ImageListItem key={item.photo}>
           <img
             src={item.photo ? item.photo : '/no-image.jpg'}

@@ -1,4 +1,12 @@
 import { useState, useEffect } from 'react';
+import useGeolocation from './Geolocation';
+
+type placesParamsType = {
+  lat: number;
+  lon: number;
+  categories: string;
+  [index: string]: string | number;
+}
 
 export function useCategories () {
   const [loading, setLoading] = useState(false);
@@ -33,26 +41,36 @@ export function useCategories () {
   }
 }
 
-export function usePlaces () {
+export function usePlaces (lat: number, lon: number, categories: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
-  const fetchPlaces = async () => {
+  const fetchPlaces = async (placesParams: placesParamsType) => {
     try {
-      const response = await fetch('/api/places');
+      const mapParameters = Object.keys(placesParams).map((param) => `${param}=${placesParams[param]}`);
+      const requestUrl = ['/api/places', '?', mapParameters.join('&')].join('');
+      const response = await fetch(requestUrl);
       return await response.json();
     } catch (error) {
       throw new Error('Could not retrieve places');
     }
   };
 
-  useEffect(() => {
+  const updatePlaces = () => {
+    if (!lat && !lon) {
+      return;
+    }
+
     setLoading(true);
-    fetchPlaces().then(
+    fetchPlaces({lat, lon, categories}).then(
       ({places}) => setData(places),
       (error) => setError(error),
     );
+  };
+
+  useEffect(() => {
+    updatePlaces();
   }, []);
 
   useEffect(() => {
@@ -62,6 +80,11 @@ export function usePlaces () {
   return {
     places: data || [],
     isLoading: loading,
-    isError: error
+    isError: error,
+    updatePlaces,
   }
+}
+
+export {
+  useGeolocation
 }
