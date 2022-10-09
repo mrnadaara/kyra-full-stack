@@ -1,3 +1,6 @@
+import {forwardRef} from 'react';
+import ButtonLink from '@mui/material/Link';
+import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,18 +22,26 @@ const Navbar = () => (
             Kyra Full-stack
         </Typography>
         <Box className={styles.buttoncontainer}>
-          <Button
-            onClick={() => ''}
-            sx={{ my: 2, color: 'white', display: 'block' }}
-          >
-            View on Github
-          </Button>
-          <Button
-            onClick={() => ''}
-            sx={{ my: 2, color: 'white', display: 'block' }}
-          >
-            API Docs
-          </Button>
+          <Link href="https://github.com/mrnadaara" passHref>
+            <ButtonLink
+              target="_blank"
+              rel="noopener"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              underline="none"
+            >
+              Visit my Github
+            </ButtonLink>
+          </Link>
+          <Link href={`${process.env.NEXT_PUBLIC_KYRA_BACKEND_URL}/docs`} passHref>
+            <ButtonLink
+              target="_blank"
+              rel="noopener"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              underline="none"
+            >
+              API Docs
+            </ButtonLink>
+          </Link>
         </Box>
       </Toolbar>
     </Container>

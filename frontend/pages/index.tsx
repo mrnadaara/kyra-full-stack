@@ -63,10 +63,7 @@ const Home: NextPage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Powered by{' '}
-            <span className={styles.logo}>
-              <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-            </span>
+            Developed by Sharmaarke Ahmed as part of an assessment
           </a>
         </footer>
       </div>

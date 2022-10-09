@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -30,6 +30,8 @@ export default function SelectCategory({
 }: CategoryProp) {
   const theme = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const selectedCategoryRef = useRef<any | null>(null);
+  const [timer, setTimer] = useState<any>(0);
   const handleChange = (event: SelectChangeEvent<typeof selectedCategory>) => {
     const {
       target: { value },
@@ -41,10 +43,14 @@ export default function SelectCategory({
   };
 
   const updateCategories = useCallback(() => {
-    updateSelectedCategories(selectedCategory.join(','))
-  }, [selectedCategory, updateSelectedCategories]);
+    if (typeof timer === 'number' && timer !== 0) {
+      clearTimeout(timer);
+    }
+    setTimer(setTimeout(() => updateSelectedCategories(selectedCategoryRef.current.join(',')), 2000));
+  }, [updateSelectedCategories, timer, selectedCategoryRef]);
 
   useEffect(() => {
+    selectedCategoryRef.current = selectedCategory;
     updateCategories();
   }, [selectedCategory, updateCategories]);
 
