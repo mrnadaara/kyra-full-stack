@@ -37,12 +37,14 @@ jobs:
           FOURSQUARE_API_KEY: ${{ secrets.FOURSQUARE_API_KEY }}
           FOURSQUARE_CLIENT_SECRET: ${{ secrets.FOURSQUARE_CLIENT_SECRET }}
         run: |
-          touch ./backend/.env
-          echo PORT="$PORT" >> ./backend/.env
-          echo FOURSQUARE_API_VERSION="$FOURSQUARE_API_VERSION" >> ./backend/.env
-          echo FOURSQUARE_API_KEY="$FOURSQUARE_API_KEY" >> ./backend/.env
-          echo FOURSQUARE_CLIENT_SECRET="$FOURSQUARE_CLIENT_SECRET" >> ./backend/.env
+          touch ${{ github.workspace }}/backend/.env
+          echo PORT="$PORT" >> ${{ github.workspace }}/backend/.env
+          echo FOURSQUARE_API_VERSION="$FOURSQUARE_API_VERSION" >> ${{ github.workspace }}/backend/.env
+          echo FOURSQUARE_API_KEY="$FOURSQUARE_API_KEY" >> ${{ github.workspace }}/backend/.env
+          echo FOURSQUARE_CLIENT_SECRET="$FOURSQUARE_CLIENT_SECRET" >> ${{ github.workspace }}/backend/.env
           ls -a ${{ github.workspace }}/backend
+          echo "cat .env"
+          cat ${{ github.workspace }}/backend/.env
         shell: bash
       - name: Build the stack
         run: yarn docker:test
