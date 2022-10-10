@@ -42,17 +42,17 @@ export default function SelectCategory({
     );
   };
 
-  const updateCategories = useCallback(() => {
+  const updateCategories = () => {
     if (typeof timer === 'number' && timer !== 0) {
       clearTimeout(timer);
     }
     setTimer(setTimeout(() => updateSelectedCategories(selectedCategoryRef.current.join(',')), 2000));
-  }, [updateSelectedCategories, timer, selectedCategoryRef]);
+  };
 
   useEffect(() => {
     selectedCategoryRef.current = selectedCategory;
     updateCategories();
-  }, [selectedCategory, updateCategories]);
+  }, [selectedCategory]);
 
   if (loading) {
     return (

@@ -4,7 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import styles from '../../styles/Navbar.module.scss';
 
@@ -31,7 +30,7 @@ const Navbar = () => (
               Visit my Github
             </ButtonLink>
           </Link>
-          <Link href={`${process.env.NEXT_PUBLIC_KYRA_BACKEND_URL}/docs`} passHref>
+          <Link href={`${process.env.NEXT_PUBLIC_KYRA_API_DOCS}`} passHref>
             <ButtonLink
               target="_blank"
               rel="noopener"

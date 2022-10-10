@@ -7,7 +7,9 @@ services:
     command: yarn dev -L
 
   frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./dockerfiles/development.dockerfile
     container_name: kyra-next-dev
-    env_file: ./frontend/.env.development
     restart: always
     command: yarn dev

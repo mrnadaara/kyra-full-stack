@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
-    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "test": "jest -i --colors --verbose --detectOpenHandles",
     "test:watch": "jest -i --watchAll",
     "coverage": "jest -i --coverage",
@@ -20,8 +20,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.js",
-    "prettier:fix": "prettier --write **/*.js",
-    "prepare": "husky install"
+    "prettier:fix": "prettier --write **/*.js"
   },
   "keywords": [
     "node",
@@ -85,7 +84,6 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-security": "^1.4.0",
     "faker": "^5.1.0",
-    "husky": "^7.0.0",
     "jest": "^26.0.1",
     "lint-staged": "^11.0.0",
     "nock": "^13.2.9",

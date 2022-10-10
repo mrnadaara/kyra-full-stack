@@ -13,7 +13,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_KYRA_BACKEND_URL}/places/categories`);
+  const response = await fetch(`${process.env.KYRA_BACKEND_URL}/places/categories`);
   const categories = await response.json();
   res.status(200).json(categories);
 }

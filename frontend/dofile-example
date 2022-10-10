@@ -1,5 +1,7 @@
 FROM node:alpine
 
+ENV NEXT_PUBLIC_KYRA_BACKEND_URL="http://backend:5000/v1"
+
 RUN mkdir -p /usr/src/next-app && chown -R node:node /usr/src/next-app
 
 WORKDIR /usr/src/next-app
@@ -11,7 +13,5 @@ USER node
 RUN yarn install --pure-lockfile
 
 COPY --chown=node:node . .
-
-RUN yarn build
 
 EXPOSE 3000

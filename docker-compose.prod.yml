@@ -7,7 +7,9 @@ services:
     command: yarn start
 
   frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./dockerfiles/production.dockerfile
     container_name: kyra-next-prod
-    env_file: ./frontend/.env.production
     restart: always
     command: yarn start
