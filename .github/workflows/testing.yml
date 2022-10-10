@@ -31,20 +31,21 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Add .env variables
+        working-directory: ./backend
         env:
           PORT: ${{ secrets.PORT }}
           FOURSQUARE_API_VERSION: ${{ secrets.FOURSQUARE_API_VERSION }}
           FOURSQUARE_API_KEY: ${{ secrets.FOURSQUARE_API_KEY }}
           FOURSQUARE_CLIENT_SECRET: ${{ secrets.FOURSQUARE_CLIENT_SECRET }}
         run: |
-          touch ${{ github.workspace }}/backend/.env
-          echo PORT="$PORT" >> ${{ github.workspace }}/backend/.env
-          echo FOURSQUARE_API_VERSION="$FOURSQUARE_API_VERSION" >> ${{ github.workspace }}/backend/.env
-          echo FOURSQUARE_API_KEY="$FOURSQUARE_API_KEY" >> ${{ github.workspace }}/backend/.env
-          echo FOURSQUARE_CLIENT_SECRET="$FOURSQUARE_CLIENT_SECRET" >> ${{ github.workspace }}/backend/.env
-          ls -a ${{ github.workspace }}/backend
+          touch .env
+          echo PORT="$PORT" >> .env
+          echo FOURSQUARE_API_VERSION="$FOURSQUARE_API_VERSION" >> .env
+          echo FOURSQUARE_API_KEY="$FOURSQUARE_API_KEY" >> .env
+          echo FOURSQUARE_CLIENT_SECRET="$FOURSQUARE_CLIENT_SECRET" >> .env
+          ls -a
           echo "cat .env"
-          cat ${{ github.workspace }}/backend/.env
+          cat .env
         shell: bash
       - name: Build the stack
         run: yarn docker:test
