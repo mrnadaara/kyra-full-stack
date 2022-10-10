@@ -40,18 +40,21 @@ jobs:
         run: |
           touch .env
           echo PORT="$PORT" >> .env
-          echo FOURSQUARE_API_VERSION="$FOURSQUARE_API_VERSION" >> .env
-          echo FOURSQUARE_API_KEY="$FOURSQUARE_API_KEY" >> .env
-          echo FOURSQUARE_CLIENT_SECRET="$FOURSQUARE_CLIENT_SECRET" >> .env
+          echo FOURSQUARE_API_VERSION="${{ env.FOURSQUARE_API_VERSION }}" >> .env
+          echo FOURSQUARE_API_KEY="${{ env.FOURSQUARE_API_KEY }}" >> .env
+          echo FOURSQUARE_CLIENT_SECRET="${{ env.FOURSQUARE_CLIENT_SECRET }}" >> .env
           ls -a
-          echo "cat .env"
-          cat .env
         shell: bash
       - name: Build the stack
         working-directory: ./backend
         run: yarn install
       - name: Run tests
         working-directory: ./backend
+        run: |
+          echo "cat .env"
+          cat .env
+          ls -a
+        shell: bash
         run: yarn test
 #       -
 #         name: Login to Docker Hub
