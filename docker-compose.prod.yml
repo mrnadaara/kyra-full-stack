@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: kyra-node-prod
+    restart: always
+    command: yarn start
+
+  frontend:
+    container_name: kyra-next-prod
+    env_file: ./frontend/.env.production
+    restart: always
+    command: yarn start

@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: kyra-node-dev
+    restart: always
+    command: yarn dev -L
+
+  frontend:
+    container_name: kyra-next-dev
+    env_file: ./frontend/.env.development
+    restart: always
+    command: yarn dev

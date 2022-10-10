@@ -1,0 +1,6 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: kyra-node-test
+    command: yarn test
