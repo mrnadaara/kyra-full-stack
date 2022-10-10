@@ -30,7 +30,7 @@ const Navbar = () => (
               Visit my Github
             </ButtonLink>
           </Link>
-          <Link href={`${process.env.NEXT_PUBLIC_KYRA_API_DOCS}`} passHref>
+          {process.env.NEXT_PUBLIC_KYRA_API_DOCS && <Link href={`${process.env.NEXT_PUBLIC_KYRA_API_DOCS}`} passHref>
             <ButtonLink
               target="_blank"
               rel="noopener"
@@ -39,7 +39,7 @@ const Navbar = () => (
             >
               API Docs
             </ButtonLink>
-          </Link>
+          </Link>}
         </Box>
       </Toolbar>
     </Container>
