@@ -5,8 +5,6 @@ services:
     build: ./backend
     image: kyra-node
     env_file: ./backend/.env
-    ports:
-      - '5000:5000'
   
   frontend:
     image: kyra-next
