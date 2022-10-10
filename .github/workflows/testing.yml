@@ -37,7 +37,7 @@ jobs:
           envkey_FOURSQUARE_API_VERSION: ${{ secrets.FOURSQUARE_API_VERSION }}
           envkey_FOURSQUARE_API_KEY: ${{ secrets.FOURSQUARE_API_KEY }}
           envkey_FOURSQUARE_CLIENT_SECRET: ${{ secrets.FOURSQUARE_CLIENT_SECRET }}
-          directory: ${{ github.workspace }}/backend
+          directory: backend/
       - name: Build the stack
         run: yarn docker:test
 #       -
