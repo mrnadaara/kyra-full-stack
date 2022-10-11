@@ -3,11 +3,11 @@ version: '3.9'
 services:
   backend:
     build: ./backend
-    image: kyra-node
+    image: mrnadaara/kyra-node
     env_file: ./backend/.env
   
   frontend:
-    image: kyra-next
+    image: mrnadaara/kyra-next
     ports:
       - '3000:3000'
     depends_on:

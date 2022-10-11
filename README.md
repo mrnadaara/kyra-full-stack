@@ -16,7 +16,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://limitless-stream-11247.herokuapp.com/)
+[Live Demo Link](https://kyra-full-stack-development-test.link/)
 
 ## Getting Started
 
@@ -26,6 +26,7 @@ To get a local copy up and running follow these simple example steps.
 
 - Node.Js
 - Yarn or NPM
+- Docker
 - Browser of any choice
 
 ### Setup
@@ -34,26 +35,32 @@ To get a local copy up and running follow these simple example steps.
 
 2. Go to repo directory ``` cd kyra-full-stack ```
 
-3. For the backend, install all packages ``` cd backend && yarn install ```
+3. Install root dependencies ``` yarn install ```
 
-4. For the frontend, install all packages ``` cd frontend && yarn install ```
+4. Install frontend and backend dependencies ``` yarn setup ```
 
 ### Usage
 
-- Start development server 
-  - To run both backend and frontend, simply run npm start in the root directory
-  - You can alternatively run them both separately.
-  - ``` cd backend && yarn dev ``` for the backend
-  - ``` cd frontend && yarn dev ``` for the frontend
+- Start development server
+  - NPM/Yarn
+    - To run both backend and frontend, simply run ``` yarn dev ``` in the root directory
+    - You can alternatively run them both separately.
+    - ``` yarn backend:dev ``` for the backend
+    - ``` yarn frontend:dev ``` for the frontend
+  - Docker
+    - Run ``` yarn docker:dev ``` to build and run a compose project
 
 ### Deployment
 
 Project was deployed to AWS
 
+### CI/CD
+
+Continuous integration was implemented using Github Actions
+
 ### Testing
 
-- For Node.JS integration and unit testing ``` cd backend && yarn test ```
-- You can also use ``` cd backend && yarn test:watch ``` to watch for file changes
+- For Node.JS integration and unit testing, run ``` yarn backend:test ```
 
 ## Author
 
