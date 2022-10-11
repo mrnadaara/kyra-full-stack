@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: Test stack
+    name: Run tests on the backend
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -28,35 +28,26 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout 
         uses: actions/checkout@v3
-      - name: Install Dependencies
+      - name: Install root dependencies
         run: npm install
       - name: Add .env variables
         working-directory: ./backend
         env:
-          PORT: 5000
           FOURSQUARE_API_VERSION: v3
-          FOURSQUARE_API_KEY: yooo
-          FOURSQUARE_CLIENT_SECRET: heeeyyy
-          FOURSQUARE_CLIENT_ID: damnssooooon
+          FOURSQUARE_API_KEY: ${{ secrets.FOURSQUARE_API_KEY }}
+          FOURSQUARE_CLIENT_SECRET: ${{ secrets.FOURSQUARE_CLIENT_SECRET }}
+          FOURSQUARE_CLIENT_ID: ${{ secrets.FOURSQUARE_CLIENT_ID }}
         run: |
           touch .env
-          echo PORT="$PORT" >> .env
           echo FOURSQUARE_API_VERSION="${{ env.FOURSQUARE_API_VERSION }}" >> .env
           echo FOURSQUARE_API_KEY="${{ env.FOURSQUARE_API_KEY }}" >> .env
           echo FOURSQUARE_CLIENT_SECRET="${{ env.FOURSQUARE_CLIENT_SECRET }}" >> .env
           echo FOURSQUARE_CLIENT_ID="${{ env.FOURSQUARE_CLIENT_ID }}" >> .env
           ls -a
         shell: bash
-      - name: Build the stack
+      - name: Install backend dependencies
         working-directory: ./backend
         run: yarn install
-      - name: Check env
-        working-directory: ./backend
-        run: |
-          echo "cat .env"
-          cat .env
-          ls -a
-        shell: bash
       - name: Run tests
         working-directory: ./backend
         run: yarn test
