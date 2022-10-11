@@ -8,6 +8,7 @@
     "backend:dev": "cd backend && yarn dev -L",
     "frontend:dev": "cd frontend && yarn dev",
     "backend:test": "cd backend && yarn test",
+    "generate:env": "cd backend && cp .env.example .env",
     "dev": "concurrently \"yarn:backend:dev\" \"yarn:frontend:dev\"",
     "docker:push": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml push",
     "docker:build": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml build",

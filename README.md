@@ -39,6 +39,10 @@ To get a local copy up and running follow these simple example steps.
 
 4. Install frontend and backend dependencies ``` yarn setup ```
 
+5. Generate .env for the backend directory by running ``` yarn generate:env ```
+
+6. Fill in your Foursquare API credentials 
+
 ### Usage
 
 - Start development server

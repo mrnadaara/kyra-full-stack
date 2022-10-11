@@ -5,6 +5,8 @@ services:
     container_name: kyra-node-prod
     restart: always
     command: yarn start
+    secrets:
+      - env
 
   frontend:
     build:
@@ -13,3 +15,8 @@ services:
     container_name: kyra-next-prod
     restart: always
     command: yarn start
+
+secrets:
+  env:
+    name: "arn:aws:secretsmanager:eu-west-2:357483939706:secret:prod/kyra-full-stack/.env-6jruig"
+    external: true
