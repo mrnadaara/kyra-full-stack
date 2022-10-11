@@ -48,13 +48,16 @@ jobs:
       - name: Build the stack
         working-directory: ./backend
         run: yarn install
-      - name: Run tests
+      - name: Check env
         working-directory: ./backend
         run: |
           echo "cat .env"
           cat .env
           ls -a
         shell: bash
+      - name: Run tests
+        working-directory: ./backend
+        run: yarn test
 #       -
 #         name: Login to Docker Hub
 #         uses: docker/login-action@v2
