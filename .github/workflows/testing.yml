@@ -37,12 +37,14 @@ jobs:
           FOURSQUARE_API_VERSION: v3
           FOURSQUARE_API_KEY: yooo
           FOURSQUARE_CLIENT_SECRET: heeeyyy
+          FOURSQUARE_CLIENT_ID: damnssooooon
         run: |
           touch .env
           echo PORT="$PORT" >> .env
           echo FOURSQUARE_API_VERSION="${{ env.FOURSQUARE_API_VERSION }}" >> .env
           echo FOURSQUARE_API_KEY="${{ env.FOURSQUARE_API_KEY }}" >> .env
           echo FOURSQUARE_CLIENT_SECRET="${{ env.FOURSQUARE_CLIENT_SECRET }}" >> .env
+          echo FOURSQUARE_CLIENT_ID="${{ env.FOURSQUARE_CLIENT_ID }}" >> .env
           ls -a
         shell: bash
       - name: Build the stack
