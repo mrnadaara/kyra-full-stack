@@ -5,7 +5,6 @@ services:
     container_name: kyra-node-dev
     restart: always
     command: yarn dev -L
-    env_file: ./backend/.env
     ports:
       - '5000:5000'
 
