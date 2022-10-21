@@ -74,10 +74,6 @@ Continuous integration was implemented using Github Actions
 - Twitter: [@mrnadaara](https://twitter.com/mrnadaara)
 - Linkedin: [Sharma'arke Ahmed](https://www.linkedin.com/in/sharmarke-ahmed/)
 
-## Information about the project
-
-- This project was developed by the author as part of an assessment for Kyra Media
-
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
